@@ -1,0 +1,91 @@
+
+# ==============================
+# Python
+# ==============================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# ==============================
+# Virtual Environments
+# ==============================
+.venv/
+venv/
+env/
+
+# ==============================
+# Environment Variables & Secrets
+# ==============================
+.env
+.env.*
+!.env.example
+
+# ==============================
+# Testing & Coverage
+# ==============================
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# ==============================
+# Type Checking & Linting
+# ==============================
+.mypy_cache/
+.ruff_cache/
+.pyright/
+
+# ==============================
+# IDE & Editors
+# ==============================
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# ==============================
+# Logs
+# ==============================
+*.log
+logs/
+
+# ==============================
+# Database Files
+# ==============================
+*.sqlite3
+*.db
+
+# ==============================
+# Alembic
+# ==============================
+# Keep alembic.ini, env.py and versions/
+# Do not ignore migration files.
+
+# ==============================
+# Docker
+# ==============================
+.docker/
+docker-data/
+
+# ==============================
+# Temporary Files
+# ==============================
+*.tmp
+*.temp
+*.bak
+*.orig
+
+# ==============================
+# Documentation Build
+# ==============================
+site/
+docs/_build/
