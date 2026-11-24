@@ -1,9 +1,9 @@
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.response import ResponseInfo
 from app.db.dependencies import get_db
-from app.modules.users.exceptions import UserAlreadyExistsError
 from app.modules.users.schemas import (
     UserRegisterSchema,
     UserResponseSchema,
@@ -16,7 +16,7 @@ router = APIRouter()
 
 @router.post(
     "/register",
-    response_model=UserResponseSchema,
+    response_model=ResponseInfo[UserResponseSchema],
     status_code=status.HTTP_201_CREATED,
     summary="Register a new user",
 )
@@ -24,16 +24,16 @@ async def register(
     user_data: UserRegisterSchema,
     session: AsyncSession = Depends(get_db),
 ):
-    try:
-        user = await register_user(
-            session=session,
-            user_data=user_data,
-        )
 
-        return user
+    user = await register_user(
+        session=session,
+        user_data=user_data,
+    )
 
-    except UserAlreadyExistsError as exc:
-        raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail=str(exc),
-        ) from exc
+    return ResponseInfo[UserResponseSchema](
+        success=True,
+        message="User registered successfully",
+        status_code=status.HTTP_201_CREATED,
+        data=user,
+        errors=None,
+    )

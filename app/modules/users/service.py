@@ -9,8 +9,6 @@ from app.modules.users.repository import get_user_by_email
 from app.modules.users.schemas import UserRegisterSchema
 
 
-
-
 async def register_user(
     session: AsyncSession,
     user_data: UserRegisterSchema,
@@ -27,9 +25,7 @@ async def register_user(
             )
 
             if existing_user:
-                raise UserAlreadyExistsError(
-                    "An account with this email already exists."
-                )
+                raise UserAlreadyExistsError()
 
             user = User(
                 email=email,
@@ -48,6 +44,4 @@ async def register_user(
         return user
 
     except IntegrityError as exc:
-        raise UserAlreadyExistsError(
-            "An account with this email already exists."
-        ) from exc
+        raise UserAlreadyExistsError() from exc
